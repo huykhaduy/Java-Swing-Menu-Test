@@ -11,13 +11,28 @@ import javax.swing.JPanel;
 import java.awt.CardLayout;
 
 public class MenuItem extends DRoundPanel {
+    //Lưu danh sách con
     private List<MenuItem> items;
+
+    //Hàm thực hiện chức năng khi được click, do người dùng truyền vào
     private ActionListener actionListener;
+
+    //Hàm kiểm tra xem form đang hiện hoặc không hiện
     private boolean isShowing;
+
+    //Icon của item
     private final ImageIcon icon = new ImageIcon();
+
+    //Text hiện ra của item
     private final JLabel label = new JLabel();
+
+    //Panel chứa nội dung khi click vào item
     private JPanel showPanel;
+
+    //Lưu pannel nơi để hiện ra nội dung của pannel trên
     private JPanel whereToShow;
+
+    //Lưu item cha (nếu có) để truy cập về sau
     private MenuItem menuParent;
 
 
@@ -48,6 +63,8 @@ public class MenuItem extends DRoundPanel {
         return this.label;
     }
 
+
+    //Instance initalize block
     {
         // setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         setLayout(new CardLayout());
@@ -72,9 +89,6 @@ public class MenuItem extends DRoundPanel {
                 }
             }
         });
-
-        // add(icon.getImage());
-       
         
     }
 
@@ -96,7 +110,6 @@ public class MenuItem extends DRoundPanel {
         this.isShowing = isShowing;
     }
 
-
     public ActionListener getActionListener() {
         return this.actionListener;
     }
@@ -113,6 +126,7 @@ public class MenuItem extends DRoundPanel {
         this.showPanel = showPanel;
     }
 
+    //Hàm thực hiện thêm menu item vào panel
     public void addSubItemTo(JPanel frame) {
         if (this.items == null) {
             return;
@@ -126,6 +140,7 @@ public class MenuItem extends DRoundPanel {
 
     }
 
+    //Lấy menu item đang active
     public MenuItem getActiveItem() {
         if (isShowing == true)
             return this;
@@ -143,6 +158,7 @@ public class MenuItem extends DRoundPanel {
         this.whereToShow = whereToShow;
     }
 
+    //Thêm panel hiện nội dung khi click vào menuitem (cho cả các thành phần con)
     public void addShowItemsTo(JPanel whereToShow) {
         if (this.whereToShow == null) {
             this.whereToShow = whereToShow;
@@ -155,6 +171,7 @@ public class MenuItem extends DRoundPanel {
         }
     }
     
+    //Reload lại menu item nếu thay đổi danh sách con
     protected void reLoadItems() {
         if (items != null) {
             for (int i = 0; i < items.size(); i++) {
